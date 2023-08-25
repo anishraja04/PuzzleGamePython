@@ -1,0 +1,62 @@
+class QuizGame:
+    def __init__(self):
+        self.questions = [
+            {
+                "question": "What is the capital of France?",
+                "choices": ["Paris", "London", "Berlin", "Rome"],
+                "answer": "Paris"
+            },
+            {
+                "question": "Which planet is known as the Red Planet?",
+                "choices": ["Venus", "Mars", "Jupiter", "Saturn"],
+                "answer": "Mars"
+            },
+            {
+                "question": "What is the largest mammal?",
+                "choices": ["Elephant", "Giraffe", "Blue Whale", "Hippopotamus"],
+                "answer": "Blue Whale"
+            }
+            # Add more questions here
+        ]
+        
+        self.score = 0
+
+    def display_welcome(self):
+        print("Welcome to the Quiz Game!")
+        print("You'll be presented with multiple-choice questions.")
+        print("Select the correct answer by typing the corresponding letter.")
+        print("Let's begin!\n")
+
+    def present_question(self, question_data):
+        print(question_data["question"])
+        for i, choice in enumerate(question_data["choices"]):
+            print(f"{chr(65 + i)}. {choice}")
+        user_answer = input("Your answer (A/B/C/D): ").upper()
+        self.evaluate_answer(question_data["answer"], user_answer)
+
+    def evaluate_answer(self, correct_answer, user_answer):
+        if user_answer == correct_answer[0]:
+            print("Correct!\n")
+            self.score += 1
+        else:
+            print(f"Incorrect. The correct answer is: {correct_answer}\n")
+
+    def play_quiz(self):
+        self.display_welcome()
+
+        for question_data in self.questions:
+            self.present_question(question_data)
+
+        self.display_final_results()
+
+    def display_final_results(self):
+        print("Quiz completed!")
+        print(f"Your score: {self.score}/{len(self.questions)}")
+        if self.score == len(self.questions):
+            print("Congratulations! You got all the questions right!")
+        else:
+            print("Keep practicing and improve your score next time.")
+
+if __name__ == "__main__":
+    game = QuizGame()
+    game.play_quiz()
